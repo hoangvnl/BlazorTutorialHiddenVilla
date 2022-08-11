@@ -1,0 +1,34 @@
+﻿<div class="border m-4 p-5">
+    <h3>ChildrenComponent</h3>
+    <h5>@ChildContent</h5>
+    <h5>@DangerChildContent</h5>
+    <h2>Title: @Title</h2>
+
+    @if (ChildContent == null)
+    {
+        <h1>ChildContent is null</h1>
+    } @if (DangerChildContent == null)
+    {
+        <h1 class="my-5 alert-danger">DangerChildContent is null</h1>
+    }
+
+    <input type="checkbox" @onchange="CheckChildren" /> Check me
+    <button @onclick="OnClick">Click me </button>
+
+    <GrandChildComponent></GrandChildComponent>
+
+</div>
+@code {
+    [Parameter]
+    public string Title { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnCheckChildren { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment DangerChildContent { get; set; }
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+    protected async void CheckChildren(ChangeEventArgs e) => await OnCheckChildren.InvokeAsync((bool)e.Value);
+}

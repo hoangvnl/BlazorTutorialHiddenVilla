@@ -1,0 +1,23 @@
+﻿<div>
+    <h4 class="text-primary pt-3">Another Child Component</h4>
+    <input id="blazor-room" @attributes="InputAttributes" class="form-control"/>
+</div>
+
+@code {
+    //[Parameter]
+    //public string Placeholder { get; set; } = "Inital Text";
+    //[Parameter]
+    //public string MaxLength { get; set; } = "4";
+
+    // attribute splatting
+
+    //[Parameter]
+    //public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>()
+    //{
+    //    {"placeholder","Inital Text"},
+    //    {"maxlength",10}
+    //};
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>();
+}

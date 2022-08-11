@@ -1,0 +1,54 @@
+﻿@page "/ParentComponent"
+
+
+<h3>ParentComponent</h3>
+    Count Children: @SelectedChildren
+<br />
+
+<CascadingValue Value="messageFun" Name="MessageFromGrandParent">
+    <CascadingValue Value="luckyNumber" Name="LuckyNumberFromGrandParent">
+        <ChildrenComponent Title="This is 1st child component" OnCheckChildren="CheckChildren" OnClick="ShowMessage">
+            using ChildContent
+        </ChildrenComponent>
+    </CascadingValue>
+</CascadingValue>
+
+
+Message: @Message
+
+
+
+
+<AnotherChildComponent InputAttributes="InputAttributesFromParent"></AnotherChildComponent>
+<AnotherChildComponent placeholder="placeholder for capture values"></AnotherChildComponent>
+
+
+
+@code {
+    private string messageFun = "message from grand parent 123123";
+    private string luckyNumber = "4";
+    private int SelectedChildren { get; set; } = 0;
+    private string Message = "";
+    public Dictionary<string, object> InputAttributesFromParent { get; set; } = new Dictionary<string, object>()
+    {
+        {"placeholder","Placeholder from parent"},
+        {"maxlength",10}
+    };
+    protected void ShowMessage(MouseEventArgs e)
+    {
+        Message = "Hello from blazor";
+    }
+
+
+    protected void CheckChildren(bool e)
+    {
+        if (e)
+        {
+            SelectedChildren++;
+        }
+        else
+        {
+            SelectedChildren--;
+        }
+    }
+}
